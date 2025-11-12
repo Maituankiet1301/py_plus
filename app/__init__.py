@@ -16,6 +16,8 @@ def create_app():
     from .routes import bp as main_bp
     app.register_blueprint(main_bp)
 
-    from .models import *  # noqa
+    # Import models để Alembic/Flask-Migrate phát hiện bảng
+    with app.app_context():
+        from . import models  # noqa: F401
 
     return app
